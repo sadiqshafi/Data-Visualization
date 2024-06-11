@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadiq's Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            color: #333;
+        }
+
+        /* Without flexible Navbar */
+
+        header {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        /* flexible Navbar code begins here */
+        /* header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 97.2%;
+            z-index: 1000; 
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }           8*/
+        /* flexible Navbar code ends here*/
+
+        header img {
+            height: 40px;
+            margin-right: 20px;
+        }
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            text-align: center;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+
+        /* CSS for Contact Us section */
+
+#contact .contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contact .form-group {
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#contact textarea {
+    height: 150px;
+}
+
+#contact button {
+    width: 10%;
+    padding: 10px;
+    background: linear-gradient(to right, #11998e, #38ef7d, #8e2de2);
+    color: black;
+    border: black;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+            /* CSS for contact us ends here */
+
+
+            /* CSS for Home section */
+#home .home-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 10%;
+    margin-top: 5%;
+}
+
+#home .home-image {
+    flex: 1;
+}
+
+#home .home-description {
+    flex: 1; 
+}
+
+#home .home-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+#home h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#home p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+            /* CSS for home ends here */
+
+ /* CSS for about starts here */
+
+            #about .about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10.5%;
+    margin-bottom: 10.5%;
+}
+
+#about .about-description {
+    flex: 1;
+}
+
+#about .about-image {
+    flex: 1;
+}
+
+#about .about-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+#about h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#about p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+            /* CSS for about ends here */
+
+        canvas {
+            max-width: 100%;
+            height: 400px !important;
+        }
+        form input[type="text"], form input[type="file"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        form button {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #11998e, #38ef7d, #8e2de2);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .analysis {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-size: 18px;
+            z-index: 1000;
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        footer img {
+            height: 30px;
+            margin-bottom: 10px;
+        }
+        footer nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        footer nav a {
+            color: white;
+            text-decoration: none;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        .dark-mode {
+            background: #121212;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <img src="logos.png" alt="Logo">
+            <h1>Sadiq's Data Visualization</h1>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#chart">Chart</a>
+            <a href="#bar">Bar</a>
+            <a href="#graph">Graph</a>
+            <a href="#contact">Contact</a>
+            <button onclick="toggleTheme()">Toggle Theme</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="home">
+            <section id="home">
+                <div class="home-content">
+                    <div class="home-image">
+                        <img src="home.jpeg" alt="Home Image">
+                    </div>
+                    <div class="home-description">
+                        <h2>Welcome to Data Visualization</h2>
+                        <p>Visualize your data with dynamic charts and advanced analysis. Sadiq's Data Visualization offers powerful tools to help you understand your data better and make informed decisions.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="about">
+                <div class="about-content">
+                    <div class="about-description">
+                        <h2>About Sadiq's Data Visualization Website</h2>
+                        <p>Sadiq's Data Visualization is your one-stop shop for unlocking the power of your data. We transform raw information into compelling visuals that make complex insights clear and actionable.
+
+                           <li><b>Basic Analysis:</b></li> 
+                            
+                            <p>We help you visualize core trends and patterns using line charts, bar charts, and pie charts. These fundamental visualizations provide a clear understanding of your data's distribution and relationships between variables.
+                            </p>                            
+                           <li><b>Advanced Analysis:</b></li> 
+                            
+                           <p>For deeper insights, we leverage more advanced techniques like stacked bar charts and scatter plots. These visualizations allow you to explore correlations, identify outliers, and uncover hidden patterns within your data.
+                        </p>                                                         
+                           <b>Let <u>Sadiq's Data Visualization</u> help you turn your data into a powerful story!</b> </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="about.jpeg" alt="About Image">
+                    </div>
+                </div>
+            </section>
+            
+        <section id="chart">
+            <h2>Line Chart</h2>
+            <canvas id="chartCanvas"></canvas>
+            <form id="chartForm">
+                <input type="text" id="chartLabels" placeholder="Enter labels separated by commas">
+                <input type="text" id="chartData" placeholder="Enter data separated by commas">
+                <input type="file" id="chartFile" accept=".csv">
+                <button type="submit">Generate Chart</button>
+                <button type="button" onclick="clearData('chartLabels', 'chartData', 'chartFile')">Clear Data</button>
+            </form>
+            <div id="chartAnalysis" class="analysis"></div>
+            <button class="analysis-button" onclick="toggleAdvancedAnalysis('chartAnalysis')">Show Advanced Analysis</button>
+        </section>
+
+        <section id="bar">
+            <h2>Bar Chart</h2>
+            <canvas id="barCanvas"></canvas>
+            <form id="barForm">
+                <input type="text" id="barLabels" placeholder="Enter labels separated by commas">
+                <input type="text" id="barData" placeholder="Enter data separated by commas">
+                <input type="file" id="barFile" accept=".csv">
+                <button type="submit">Generate Chart</button>
+                <button type="button" onclick="clearData('barLabels', 'barData', 'barFile')">Clear Data</button>
+            </form>
+            <div id="barAnalysis" class="analysis"></div>
+            <button class="analysis-button" onclick="toggleAdvancedAnalysis('barAnalysis')">Show Advanced Analysis</button>
+        </section>
+
+        <section id="graph">
+            <h2>Pie Chart</h2>
+            <canvas id="graphCanvas"></canvas>
+            <form id="graphForm">
+                <input type="text" id="graphLabels" placeholder="Enter labels separated by commas">
+                <input type="text" id="graphData" placeholder="Enter data separated by commas">
+                <input type="file" id="graphFile" accept=".csv">
+                <button type="submit">Generate Chart</button>
+                <button type="button" onclick="clearData('graphLabels', 'graphData', 'graphFile')">Clear Data</button>
+            </form>
+            <div id="graphAnalysis" class="analysis"></div>
+            <button class="analysis-button" onclick="toggleAdvancedAnalysis('graphAnalysis')">Show Advanced Analysis</button>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>        
+
+    <button class="scroll-button" onclick="scrollToTopOrBottom()">&#x2193;</button>
+
+    <footer>
+        <img src="logos.png" alt="Logo">
+        <p>&copy; 2024 Sadiq's Data Visualization</p>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#chart">Chart</a>
+            <a href="#bar">Bar</a>
+            <a href="#graph">Graph</a>
+            <a href="#contact">Contact</a>
+            <button onclick="showDataUsage()">How Your Data is Used</button>
+        </nav>
+    </footer>
+
+    <script>
+        let isAdvancedAnalysisShown = false;
+
+        function toggleAdvancedAnalysis(sectionId) {
+            const section = document.getElementById(sectionId);
+            const data = JSON.parse(section.dataset.data);
+            if (isAdvancedAnalysisShown) {
+                section.innerHTML = '';
+                performBasicAnalysis(sectionId, data);
+                document.querySelector(`#${sectionId} ~ .analysis-button`).textContent = 'Show Advanced Analysis';
+            } else {
+                performAdvancedAnalysis(sectionId, data);
+                document.querySelector(`#${sectionId} ~ .analysis-button`).textContent = 'Close Advanced Analysis';
+            }
+            isAdvancedAnalysisShown = !isAdvancedAnalysisShown;
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelectorAll('section').forEach(section => section.classList.toggle('dark-mode'));
+            document.querySelector('.scroll-button').classList.toggle('dark-mode');
+        }
+
+        function performAdvancedAnalysis(sectionId, data) {
+            const analysisSection = document.getElementById(sectionId);
+            const max = Math.max(...data);
+            const min = Math.min(...data);
+            const sum = data.reduce((acc, val) => acc + val, 0);
+            const avg = (sum / data.length).toFixed(2);
+            const variance = (data.reduce((acc, val) => acc + Math.pow(val - avg, 2), 0) / data.length).toFixed(2);
+            const stdDev = Math.sqrt(variance).toFixed(2);
+            const expenditureMinus = (sum * 0.8).toFixed(2);
+            const growthPercentage = ((max - min) / min * 100).toFixed(2);
+            const sortedData = [...data].sort((a, b) => a - b);
+            const median = (sortedData[Math.floor(data.length / 2)] + sortedData[Math.ceil(data.length / 2)]) / 2;
+            const mode = data.reduce((acc, val, i, arr) => {
+                const count = arr.filter(v => v === val).length;
+                return count > acc.count ? { value: val, count: count } : acc;
+            }, { value: null, count: 0 }).value;
+            const q1 = sortedData[Math.floor(data.length / 4)];
+            const q3 = sortedData[Math.floor(data.length * 3 / 4)];
+            const iqr = q3 - q1;
+            const skewness = (3 * (avg - median) / stdDev).toFixed(2);
+            const kurtosis = (data.reduce((acc, val) => acc + Math.pow((val - avg) / stdDev, 4), 0) / data.length - 3).toFixed(2);
+
+            analysisSection.innerHTML = `
+                <p>Standard Deviation: ${stdDev}</p>
+                <p>Variance: ${variance}</p>
+                <p>Median: ${median}</p>
+                <p>Mode: ${mode}</p>
+                <p>Quartiles: Q1 = ${q1}, Q3 = ${q3}, IQR = ${iqr}</p>
+                <p>Skewness: ${skewness}</p>
+                <p>Kurtosis: ${kurtosis}</p>
+                <p>Growth Percentage: ${growthPercentage}%</p>
+                <p>Expenditure Minus 20%: ${expenditureMinus}</p>
+            `;
+        }
+
+        function performBasicAnalysis(sectionId, data) {
+            const analysisSection = document.getElementById(sectionId);
+            const max = Math.max(...data);
+            const min = Math.min(...data);
+            const sum = data.reduce((acc, val) => acc + val, 0);
+            const avg = (sum / data.length).toFixed(2);
+            const expenditureMinus = (sum * 0.8).toFixed(2);
+            const growthPercentage = ((max - min) / min * 100).toFixed(2);
+
+            analysisSection.innerHTML = `
+                <p>Max Value: ${max}</p>
+                <p>Min Value: ${min}</p>
+                <p>Average Value: ${avg}</p>
+                <p>Total Sum: ${sum}</p>
+                <p>Growth Percentage: ${growthPercentage}%</p>
+                <p>Expenditure Minus 20%: ${expenditureMinus}</p>
+            `;
+        }
+
+
+        function handleFormSubmission(event, chartType, canvasId, sectionId) {
+  event.preventDefault();
+  const labels = document.getElementById(`${chartType}Labels`).value.split(',').map(label => label.trim());
+  // Parse data into numbers, filtering out empty values
+  const data = document.getElementById(`${chartType}Data`).value.split(',').map(num => parseFloat(num.trim())).filter(val => !isNaN(val));
+  
+  if (data.length > 0) { // Check if there's any valid data before creating chart
+    createChart(canvasId, chartType === 'graph' ? 'pie' : chartType, labels, data);
+    document.getElementById(sectionId).dataset.data = JSON.stringify(data);
+    performBasicAnalysis(sectionId, data);
+  } else {
+    alert("Please enter valid numerical data separated by commas.");
+  }
+}
+
+            /*
+        function handleFormSubmission(event, chartType, canvasId, sectionId) {
+            event.preventDefault();
+            const labels = document.getElementById(`${chartType}Labels`).value.split(',').map(label => label.trim());
+            const data = document.getElementById(`${chartType}Data`).value.split(',').map(num => parseFloat(num.trim()));
+            createChart(canvasId, chartType === 'graph' ? 'pie' : chartType, labels, data);
+            document.getElementById(sectionId).dataset.data = JSON.stringify(data);
+            performBasicAnalysis(sectionId, data);
+        }
+            */
+        function handleFileUpload(event, chartType, canvasId, sectionId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const contents = e.target.result;
+                    const rows = contents.split('\n').slice(1);  // Remove header row
+                    const labels = [];
+                    const data = [];
+                    rows.forEach(row => {
+                        const cols = row.split(',');
+                        if (cols.length === 2) {
+                            labels.push(cols[0].trim());
+                            data.push(parseFloat(cols[1].trim()));
+                        }
+                    });
+                    createChart(canvasId, chartType === 'graph' ? 'pie' : chartType, labels, data);
+                    document.getElementById(sectionId).dataset.data = JSON.stringify(data);
+                    performBasicAnalysis(sectionId, data);
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function createChart(canvasId, type, labels, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Dataset',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
+            });
+        }
+
+        function clearData(labelsId, dataId, fileId) {
+            document.getElementById(labelsId).value = '';
+            document.getElementById(dataId).value = '';
+            document.getElementById(fileId).value = '';
+        }
+
+        function scrollToTopOrBottom() {
+            const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+            window.scrollTo({ top: isAtBottom ? 0 : document.body.scrollHeight, behavior: 'smooth' });
+            document.querySelector('.scroll-button').innerHTML = isAtBottom ? '&#x2193;' : '&#x2191;';
+        }
+
+        function showDataUsage() {
+  alert("We don't share your data with anyone else (third-party partners). We use it to perform some calculations and give you insights into your data like:\n\n" +
+
+    // Basic Statistics
+    "*Basic Stats: Max, Min, Avg & Total Sum Value\n\n" +
+
+    // Financial Analysis
+    "*Financial Analysis: Growth Percentage, Expenditure Minus 20%\n\n" +
+
+    // Variability Analysis
+    "*Variability Analysis: Standard Deviation, Variance\n\n" +
+
+    // Distribution Analysis
+    "*Distribution Analysis: Median, Mode\n\n" +
+
+    "  * Quartiles: Divide your data into four equal groups:- \n\n" +
+    "      * Q1 (First Quartile):\n" +
+    "      * Q3 (Third Quartile):\n" +
+    "      * IQR (Inter-quartile Range):\n\n" +
+
+    // Shape Analysis
+    "*Shape Analysis:\n" +
+    "  Skewness: A measure of how lopsided your data distribution is. A positive skew indicates more data towards higher values, while a negative skew indicates more data towards lower values.\n" +
+    "  Kurtosis: A measure of how peaked your data distribution is compared to a normal bell curve. A higher kurtosis indicates a sharper peak, while a lower kurtosis indicates a flatter peak."
+  );
+}
+
+
+        document.getElementById('chartForm').addEventListener('submit', event => handleFormSubmission(event, 'chart', 'chartCanvas', 'chartAnalysis'));
+        document.getElementById('barForm').addEventListener('submit', event => handleFormSubmission(event, 'bar', 'barCanvas', 'barAnalysis'));
+        document.getElementById('graphForm').addEventListener('submit', event => handleFormSubmission(event, 'graph', 'graphCanvas', 'graphAnalysis'));
+
+        document.getElementById('chartFile').addEventListener('change', event => handleFileUpload(event, 'chart', 'chartCanvas', 'chartAnalysis'));
+        document.getElementById('barFile').addEventListener('change', event => handleFileUpload(event, 'bar', 'barCanvas', 'barAnalysis'));
+        document.getElementById('graphFile').addEventListener('change', event => handleFileUpload(event, 'graph', 'graphCanvas', 'graphAnalysis'));
+    </script>
+</body>
+</html>
